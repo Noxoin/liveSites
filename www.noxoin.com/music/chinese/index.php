@@ -121,8 +121,6 @@
                             .'<td '.($user==$authority ? 'onclick="copy(this)"':'').'>'.$entry['artist'].'</td>'
                             .'<td>'
                                 .'<img src="../images/playIcon.png" style="float:right;height:20px;cursor:pointer" onclick="SCM.play({title:\''.$entry['song'].' - '.$entry['artist'].'\',url:\''.$entry['youtubeURL'].'\'})"/>'
-        //                         .'<embed id="audio_'.$i.'" style="float:right" src="http'.(stripos($_SERVER['SERVER_PROTOCOL'],'https')===true?'s':'').'://www.youtube.com/v/'.$youtubeID.'?hd=1&amp;version=2&amp;theme=dark&amp;border=0&amp;autoplay='.(($i==0&&$startPlay=="1")?'1':'0').'&amp;loop='.($loop==1?'1':'0').'&amp;enablejsapi=1" type="application/x-shockwave-flash" allowscriptaccess="always" width="30" height="25" >'
-        //                        .'</embed>'
                                 .($user==$authority ?
                                     '<a href="http://www.video2mp3.net/loading.php?url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3D'.$youtubeID.'" style="text-decoration:none;color:inherit">'.$entry['youtubeURL'].'</a>' :
                                     '<a href="'.$entry['youtubeURL'].'" style="text-decoration:none;color:inherit">'.$entry['youtubeURL'].'</a>')
