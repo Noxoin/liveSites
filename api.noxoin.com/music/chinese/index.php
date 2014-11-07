@@ -12,6 +12,10 @@
             header("Access-Control-Allow-Origin: ".$_SERVER['HTTP_ORIGIN']);
             header("Access-Control-Allow-Methods: GET, POST, PUT");
             header("Access-Control-Allow-Headers: charset, content-type");
+        } elseif ( strpos($_SERVER['HTTP_ORIGIN'], $allowedDomains[2]) > -1 ) {
+            header("Access-Control-Allow-Origin: ".$_SERVER['HTTP_ORIGIN']);
+            header("Access-Control-Allow-Methods: POST");
+            header("Access-Control-Allow-Headers: charset, content-type");
         }
     }
 
