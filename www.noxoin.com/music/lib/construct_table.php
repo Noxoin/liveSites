@@ -49,7 +49,7 @@
                             echo '<td '.($user==$authority ? 'onclick="copy(this)"':'').'>'.$entry['song'].'</td>'
                             .'<td '.($user==$authority ? 'onclick="copy(this)"':'').'>'.$entry['artist'].'</td>'
                             .'<td>'
-                                .'<img src="/music/images/plus-24.png" style="float:right;height:20px;cursor:pointer" onclick="SCM.nqueue('.$songJSON.')"/>'
+                                .'<img src="/music/images/plus-24.png" style="float:right;height:20px;cursor:pointer" onclick="SCM.queue('.$songJSON.')"/>'
                                 .'<img src="/music/images/playIcon.png" style="float:right;height:20px;cursor:pointer" onclick="SCM.play('.$songJSON.')"/>'
                                 .($user==$authority ?
                                     '<a href="http://www.video2mp3.net/loading.php?url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3D'.$youtubeID.'" style="text-decoration:none;color:inherit">'.$entry['youtubeURL'].'</a>' :
