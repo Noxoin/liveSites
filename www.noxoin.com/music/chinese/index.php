@@ -48,9 +48,10 @@
         if($user == $authority) {
             echo '<button type="button" style="float:right" onclick="toggleInsertion();">+</button>';
         }
-
-
 ?>
+
+        <button type="button" style="float:right" onclick="toggleRepeat(this)" style="padding-top:10px">Repeat All</button>
+
         <img src="/images/logo_small.jpg" style="height:65px;float:left;padding-top:10px;"/>
         <h1 style="font-family:Arial;padding-top:30px;padding-left:75px;font-size:32pt;margin-bottom:5px">Noxoin Chinese Music Record</h1>
         <div style="clear:both"></div>
