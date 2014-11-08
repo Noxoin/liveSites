@@ -60,6 +60,47 @@
                 }';
         }
 ?>
+            function enqueueAll() {
+                SCM.loadPlaylist(<?php echo "[$playlist]";?>);
+                SCM.play();
+            }
+
+            function entitiesPerPage(element) {
+                var index = element.selectedIndex;
+                var value = element.value;
+                console.log(value);
+                var ca = document.cookie.split(';');
+                console.log(document.cookie);
+
+                var d = new Date();
+                d.setTime(d.getTime() + (365*24*60*60*1000));
+                var expires = "expires="+d.toUTCString();
+
+                var newCookie = "";
+                for(var i=0; i<ca.length; i++) {
+                    if (i != 0) {
+                        newCookie += "; ";
+                    }
+                    var c = ca[i];
+                    while (c.charAt(0)==' ') c = c.substring(1);
+                    if (c.indexOf("entryPerPage") != -1) {
+                        c = "entryPerPage="+value;
+                    }
+                    if (c.indexOf("expires=") != -1) {
+                        c = expires;
+                    }
+                    newCookie += c;
+                }
+                if(newCookie.indexOf("entryPerPage") == -1) {
+                    if(newCookie.length > 1) {
+                        newCookie += "; ";
+                    }
+                    newCookie += "entryPerPage="+value;
+                }
+                console.log(newCookie);
+                document.cookie = newCookie;
+                location.reload();
+            }
         </script>
         <script type="text/javascript" src="http://scmplayer.net/script.js" 
         data-config="{'skin':'skins/simpleBlue/skin.css','volume':50,'autoplay':false,'shuffle':false,'repeat':1,'placement':'bottom','showplaylist':false,'playlist':[]}" ></script>

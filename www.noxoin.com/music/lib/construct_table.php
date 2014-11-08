@@ -1,9 +1,9 @@
-        <div class="CSSTableGenerator" style="margin-bottom:30px;">
+        <div class="CSSTableGenerator" style="margin-bottom:10px;">
             <table>
                 <tr>
-                    <td style="width:15%">Song</td>
-                    <td style="width:15%">Artist</td>
-                    <td>youtubeURL</td>
+                    <td>Song</td>
+                    <td>Artist</td>
+                    <td style="width:400px">youtubeURL</td>
                     <td width="150px;">Time Inserted</td>
 <?php
                     if ($user == $authority) {
@@ -14,8 +14,8 @@
                         <td widtd="25px">Star</td>
                     </tr>
                     <tr id="insertion" hidden>
-                        <td width="15%"><input type="text" style="width:100%"></td>
-                        <td width="15%"><input type="text" style="width:100%"></td>
+                        <td><input type="text" style="width:100%"></td>
+                        <td><input type="text" style="width:100%"></td>
                         <td><input type="text" style="width:100%" onkeyup="if(event.keyCode == 13) { insert(); }"></td>
                         <td></td>
                         <td></td>
@@ -26,7 +26,7 @@
 <?php
                     //Skips the entries
                     for ($i = 0; $i < $page - 1; $i++) {
-                        for ( $j = 0; $j < 20; $j++) {
+                        for ( $j = 0; $j < $entryPerPage; $j++) {
                             $entry = mysql_fetch_array($result);
                         }
                     }
@@ -35,9 +35,10 @@
                     $playlist = '';
                     $i = 0;
                     while ($entry = mysql_fetch_array($result)) {
-                        if($i >= 20) { break;}
+                        if($i >= $entryPerPage) { break;}
                         if ($i > 0) { $playlist .= ',';}
-                        $playlist .= '{\'title\':\''.mysql_real_escape_string($entry['song']).' - '.mysql_real_escape_string($entry['artist']).'\',\'url\':\''.$entry['youtubeURL'].'\'}';
+                        $songJSON = '{\'title\':\''.mysql_real_escape_string($entry['song']).' - '.mysql_real_escape_string($entry['artist']).'\',\'url\':\''.$entry['youtubeURL'].'\'}';
+                        $playlist .= $songJSON;
                         $youtubeID = substr($entry['youtubeURL'], 32);
                         if ($user == $authority) {
                             echo '<tr id="'.$i.'" '.(($entry['bad']=="1")?'style="color:red"':(($entry['downloaded']=="1")?'style="color:blue"':'')).' >';
@@ -48,7 +49,8 @@
                             echo '<td '.($user==$authority ? 'onclick="copy(this)"':'').'>'.$entry['song'].'</td>'
                             .'<td '.($user==$authority ? 'onclick="copy(this)"':'').'>'.$entry['artist'].'</td>'
                             .'<td>'
-                                .'<img src="/music/images/playIcon.png" style="float:right;height:20px;cursor:pointer" onclick="SCM.play({title:\''.$entry['song'].' - '.$entry['artist'].'\',url:\''.$entry['youtubeURL'].'\'})"/>'
+                                .'<img src="/music/images/plus-24.png" style="float:right;height:20px;cursor:pointer" onclick="SCM.nqueue('.$songJSON.')"/>'
+                                .'<img src="/music/images/playIcon.png" style="float:right;height:20px;cursor:pointer" onclick="SCM.play('.$songJSON.')"/>'
                                 .($user==$authority ?
                                     '<a href="http://www.video2mp3.net/loading.php?url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3D'.$youtubeID.'" style="text-decoration:none;color:inherit">'.$entry['youtubeURL'].'</a>' :
                                     '<a href="'.$entry['youtubeURL'].'" style="text-decoration:none;color:inherit">'.$entry['youtubeURL'].'</a>')
