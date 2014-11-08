@@ -46,7 +46,16 @@
             $maxCD == 0;
         }
 
-        $sql = "SELECT song,artist,youtubeURL,timestamp,downloaded,bad,star,cd FROM $dbTable ".($q != "" || $star==1 ? "WHERE ".($q != "" ? "song like '%".mysql_real_escape_string($q)."%' OR artist like '%".mysql_real_escape_string($q)."%' ".($star==1?"AND ":""): "").($star==1 ? "star='1'":"") : "")." ORDER BY ".($user==$authority?"downloaded ASC, star DESC,":"")."timestamp DESC";
+        $sql = "SELECT song,artist,youtubeURL,timestamp,downloaded,bad,star,cd FROM $dbTable "
+                .($q != "" || $star==1 ? 
+                    "WHERE ".($q != "" ? 
+                        "song like '%".mysql_real_escape_string($q)."%' OR artist like '%".mysql_real_escape_string($q)."%' "
+                        .($star==1?"AND ":"")
+                        : ""
+                    )
+                    .($star==1 ? "star='1'":"") 
+                    : ""
+                )." ORDER BY ".($user==$authority?"downloaded ASC, star DESC,":"")."timestamp DESC";
 
         $result = mysql_query($sql);
         if (!$result) {
@@ -73,139 +82,8 @@
 ?>
         </form>
 
-        <div class="CSSTableGenerator" style="margin-bottom:30px;">
-            <table>
-                <tr>
-                    <td style="width:15%">Song</td>
-                    <td style="width:15%">Artist</td>
-                    <td>youtubeURL</td>
-                    <td width="150px;">Time Inserted</td>
-<?php
-                    if ($user == $authority) {
-                        echo '<td width="100px">Status</td>';
-                        echo '<td width="50px">CD</td>';
-                    }
-?>
-                        <td widtd="25px">Star</td>
-                    </tr>
-                    <tr id="insertion" hidden>
-                        <td width="15%"><input type="text" style="width:100%"></td>
-                        <td width="15%"><input type="text" style="width:100%"></td>
-                        <td><input type="text" style="width:100%" onkeyup="if(event.keyCode == 13) { insert(); }"></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
+<?php include "../lib/construct_table.php"; ?>
+<?php include "../lib/scripts.php"; ?>
 
-<?php
-                    //Skips the entries
-                    for ($i = 0; $i < $page - 1; $i++) {
-                        for ( $j = 0; $j < 20; $j++) {
-                            $entry = mysql_fetch_array($result);
-                        }
-                    }
-
-                    // Fill Table
-                    $i = 0;
-                    while ($entry = mysql_fetch_array($result)) {
-                        if($i >= 20) { break;}
-                        $youtubeID = substr($entry['youtubeURL'], 32);
-                        if ($user == $authority) {
-                            echo '<tr id="'.$i.'" '.(($entry['bad']=="1")?'style="color:red"':(($entry['downloaded']=="1")?'style="color:blue"':'')).' >';
-                        } else {
-                            echo '<tr>';
-                        }
-
-                            echo '<td '.($user==$authority ? 'onclick="copy(this)"':'').'>'.$entry['song'].'</td>'
-                            .'<td '.($user==$authority ? 'onclick="copy(this)"':'').'>'.$entry['artist'].'</td>'
-                            .'<td>'
-                                .'<img src="../images/playIcon.png" style="float:right;height:20px;cursor:pointer" onclick="SCM.play({title:\''.$entry['song'].' - '.$entry['artist'].'\',url:\''.$entry['youtubeURL'].'\'})"/>'
-                                .($user==$authority ?
-                                    '<a href="http://www.video2mp3.net/loading.php?url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3D'.$youtubeID.'" style="text-decoration:none;color:inherit">'.$entry['youtubeURL'].'</a>' :
-                                    '<a href="'.$entry['youtubeURL'].'" style="text-decoration:none;color:inherit">'.$entry['youtubeURL'].'</a>')
-                            .'</td>'
-                            .'<td>'.$entry['timestamp'].'</td>';
-                            if($user == $authority) {
-                                echo '<td><select onchange="updateSong(this)"><option value=""></option><option value="downloaded" '.(($entry['bad']=="0" && $entry['downloaded']=="1")?'selected':'').'>Downloaded</option><option value="bad" '.(($entry['bad']=="1")?'selected':'').'>Bad</option></select></td>';
-                                echo '<td><select onchange="updateSong(this)"><option value="0"></option>';
-                                for ( $j = 1; $j <= $maxCD+1; $j++) {
-                                    echo "<option value=\"$j\" ".($entry['cd']==$j? "selected":"").">$j</option>";
-                                }
-                                echo '</select></td>';
-                            }
-                            echo '<td><input type="checkbox" onchange="updateSong(this)" '.($user == $authority ? '' : 'disabled').' '.($entry['star']=="1"?'checked':'').'></td>'
-                            .'</tr>';
-                            $i++;
-                    }
-?>
-                </table>
-            </div>
-
-            <script>
-<?php
-        if($user == $authority) {
-            echo 'function updateSong(element){
-                        var url = document.URL;
-                        url = url.replace("noxoin","api.noxoin");
-                        url = url.substr(0,url.indexOf("?"));
-                        var request = new XMLHttpRequest();
-                        request.open("PUT", url, true);
-                        request.setRequestHeader("content-type", "application/x-www-form-urlencoded;charset=utf8");
-                        var tr = element.parentNode.parentNode;
-                        var cells = tr.getElementsByTagName("td");
-
-                        tr.style.color = (cells[4].firstElementChild.value=="bad"? "red" : (cells[4].firstElementChild.value == "downloaded" ? "blue" : "black"));
-                        var cdIndex = cells[5].firstElementChild.selectedIndex;
-                        var cdValue = cells[5].firstElementChild.value;
-                        
-                        var data = "song="+cells[0].innerHTML
-                                +  "&artist="+cells[1].innerHTML
-                                +  "&downloaded="+(cells[4].firstElementChild.value=="downloaded"?1:0)
-                                +  "&bad="+(cells[4].firstElementChild.value=="bad"?1:0)
-                                +  "&cd="+(cells[5].firstElementChild.value)
-                                +  "&star="+(cells[6].firstElementChild.checked?1:0)
-                                +  "&user=noxoin";
-
-                        console.log(data);
-                        request.send(data);
-                    }
-                    function toggleInsertion() {
-                        var insertElem = document.getElementById("insertion");
-                        if (insertElem.hidden == true) {
-                            document.getElementById("insertion").hidden = false;
-                        } else { 
-                            document.getElementById("insertion").hidden = true;
-                        }
-                    }
-                    function insert() {
-                        var url = document.URL;
-                        url = url.replace("noxoin","api.noxoin");
-                        url = url.substr(0,url.indexOf("?"));
-                        values = document.getElementById("insertion").getElementsByTagName("input");
-
-                        var request = new XMLHttpRequest();
-                        request.open("POST", url, true);
-                        request.setRequestHeader("content-type", "application/x-www-form-urlencoded;charset=utf8");
-                        
-                        var data = "song="+values[0].value
-                                +  "&artist="+values[1].value
-                                +  "&youtubeURL="+values[2].value
-                                +  "&user=noxoin";
-
-                        console.log(data);
-                        request.send(data);
-                        setTimeout( function() {
-                            location.reload();
-                        }, 1000);
-                    }';
-        echo    'function copy(element) {
-                    window.prompt("", element.innerHTML);
-                }';
-        }
-?>
-        </script>
-        <script type="text/javascript" src="http://scmplayer.net/script.js" 
-        data-config="{'skin':'skins/simpleBlue/skin.css','volume':50,'autoplay':false,'shuffle':false,'repeat':1,'placement':'bottom','showplaylist':false,'playlist':[]}" ></script>
     </body>
 </html>
