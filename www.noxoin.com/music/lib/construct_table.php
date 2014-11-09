@@ -46,8 +46,8 @@
                             echo '<tr>';
                         }
 
-                            echo '<td '.($user==$authority ? 'onclick="copy(this)"':'').'>'.$entry['song'].'</td>'
-                            .'<td '.($user==$authority ? 'onclick="copy(this)"':'').'>'.$entry['artist'].'</td>'
+                            echo '<td '.($user==$authority ? 'onclick=\'window.prompt("", "'.$entry['song'].' - '.$entry['artist'].'")\'':'').'>'.$entry['song'].'</td>'
+                            .'<td '.($user==$authority ? 'onclick=\'window.prompt("", "'.$entry['song'].' - '.$entry['artist'].'")\'':'').'>'.$entry['artist'].'</td>'
                             .'<td>'
                                 .'<img src="/music/images/plus-24.png" style="float:right;height:20px;cursor:pointer" onclick="SCM.queue('.$songJSON.')"/>'
                                 .'<img src="/music/images/playIcon.png" style="float:right;height:20px;cursor:pointer" onclick="SCM.play('.$songJSON.')"/>'
