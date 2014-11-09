@@ -82,7 +82,7 @@
                     if (c.indexOf("_ga") != -1) {
                         continue;
                     }
-                    if (i != 0) {
+                    if (newCookie != "") {
                         newCookie += "; ";
                     }
                     while (c.charAt(0)==' ') c = c.substring(1);
