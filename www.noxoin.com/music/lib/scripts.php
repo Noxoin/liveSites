@@ -78,10 +78,13 @@
 
                 var newCookie = "";
                 for(var i=0; i<ca.length; i++) {
+                    var c = ca[i];
+                    if (c.indexOf("_ga") != -1) {
+                        continue;
+                    }
                     if (i != 0) {
                         newCookie += "; ";
                     }
-                    var c = ca[i];
                     while (c.charAt(0)==' ') c = c.substring(1);
                     if (c.indexOf("entryPerPage") != -1) {
                         c = "entryPerPage="+value;
@@ -91,15 +94,22 @@
                     }
                     newCookie += c;
                 }
+
                 if(newCookie.indexOf("entryPerPage") == -1) {
                     if(newCookie.length > 1) {
                         newCookie += "; ";
                     }
                     newCookie += "entryPerPage="+value;
                 }
+                if(newCookie.indexOf("expires") == -1) {
+                    if(newCookie.length > 1) {
+                        newCookie += "; ";
+                    }
+                    newCookie += expires;
+                }
                 console.log(newCookie);
                 document.cookie = newCookie;
-                location.reload();
+                window.location.href = window.location.href;
             }
             function toggleRepeat(element) {
                 if(element.innerHTML.indexOf("All") == -1) {
