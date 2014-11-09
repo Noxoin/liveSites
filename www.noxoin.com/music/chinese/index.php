@@ -22,8 +22,9 @@
                 color:black;
             }
         </style>
+        <?php include "../lib/script_head.php"?>
     </head>
-    <body>
+    <body onkeyup="keyPress(event.keyCode);">
 <?php
 
         include "../../config/constants.php";
