@@ -49,8 +49,8 @@
                             echo '<td '.($user==$authority ? 'onclick=\'window.prompt("", "'.$entry['song'].' - '.$entry['artist'].'")\'':'').'>'.$entry['song'].'</td>'
                             .'<td '.($user==$authority ? 'onclick=\'window.prompt("", "'.$entry['song'].' - '.$entry['artist'].'")\'':'').'>'.$entry['artist'].'</td>'
                             .'<td>'
-                                .'<img src="/music/images/plus-24.png" style="float:right;height:20px;cursor:pointer" onclick="SCM.queue('.$songJSON.')"/>'
-                                .'<img src="/music/images/playIcon.png" style="float:right;height:20px;cursor:pointer" onclick="SCM.play('.$songJSON.')"/>'
+                                .'<img src="/music/images/plus-24.png" style="float:right;height:20px;cursor:pointer" onclick="SCM.queue('.$songJSON.');"/>'
+                                .'<img src="/music/images/playIcon.png" style="float:right;height:20px;cursor:pointer" onclick="SCM.play('.$songJSON.');play=true;"/>'
                                 .($user==$authority ?
                                     '<a href="http://www.video2mp3.net/loading.php?url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3D'.$youtubeID.'" style="text-decoration:none;color:inherit">'.$entry['youtubeURL'].'</a>' :
                                     '<a href="'.$entry['youtubeURL'].'" style="text-decoration:none;color:inherit">'.$entry['youtubeURL'].'</a>')
