@@ -10,6 +10,7 @@
             function enqueueAll() {
                 SCM.loadPlaylist(<?php echo "[$playlist]";?>);
                 SCM.play();
+                play = true;
             }
 
             function toggleRepeat(element) {
