@@ -24,6 +24,9 @@
                     </tr>
 
 <?php
+                    
+                    $starList = isset($_COOKIE['starList']) ? $_COOKIE['starList'] : "";
+
                     //Skips the entries
                     for ($i = 0; $i < $page - 1; $i++) {
                         for ( $j = 0; $j < $entryPerPage; $j++) {
@@ -36,14 +39,20 @@
                     $i = 0;
                     while ($entry = mysql_fetch_array($result)) {
                         if($i >= $entryPerPage) { break;}
+                        $starred = strpos($starList, "-".$entry['id']."-");
+                        if($star == 1 && $starred === false && $user!=$authority) {
+                            continue;
+                        }
+
                         if ($i > 0) { $playlist .= ',';}
+
                         $songJSON = '{\'title\':\''.mysql_real_escape_string($entry['song']).' - '.mysql_real_escape_string($entry['artist']).'\',\'url\':\''.$entry['youtubeURL'].'\'}';
                         $playlist .= $songJSON;
                         $youtubeID = substr($entry['youtubeURL'], 32);
                         if ($user == $authority) {
                             echo '<tr id="'.$i.'" '.(($entry['bad']=="1")?'style="color:red"':(($entry['downloaded']=="1")?'style="color:blue"':'')).' >';
                         } else {
-                            echo '<tr>';
+                            echo '<tr id="'.$entry['id'].'">';
                         }
 
                             echo '<td '.($user==$authority ? 'onclick=\'window.prompt("", "'.$entry['song'].' - '.$entry['artist'].'")\'':'').'>'.$entry['song'].'</td>'
@@ -64,8 +73,12 @@
                                 }
                                 echo '</select></td>';
                             }
-                            echo '<td><input type="checkbox" onchange="updateSong(this)" '.($user == $authority ? '' : 'disabled').' '.($entry['star']=="1"?'checked':'').'></td>'
-                            .'</tr>';
+                            if ($user == $authority) {
+                                echo '<td><input type="checkbox" onchange="updateSong(this)" '.($entry['star']=="1"?'checked':'').'></td>';
+                            } else {
+                                echo '<td><input type="checkbox" onchange="starSong(this)" '.($starred > -1 ? 'checked':'').'></td>';
+                            }
+                            echo '</tr>';
                             $i++;
                     }
 ?>
