@@ -16,7 +16,7 @@ function starSong(element) {
     if(element.checked) {
         cookie.starList += id + "-";
     } else {
-        cookie.starList = starList.replace(id+"-","");
+        cookie.starList = starList.replace("-"+id+"-","-");
     }
     cookie.save(365);
 }
