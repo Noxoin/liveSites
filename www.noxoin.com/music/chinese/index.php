@@ -75,8 +75,6 @@
             }
             $sql .= " ORDER BY ".($user==$authority?"downloaded ASC, star DESC,":"")."timestamp DESC";
 
-            echo $sql;
-
 /*
             $sql = "SELECT id,song,artist,youtubeURL,timestamp,downloaded,bad,star,cd FROM $dbTable "
                     .($q != "" || $star==1 ? 
