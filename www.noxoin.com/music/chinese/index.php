@@ -68,12 +68,14 @@
             }
 
             $sql = "SELECT id,song,artist,youtubeURL,timestamp,downloaded,bad,star,cd FROM $dbTable "
-                    ."WHERE song like '%".mysql_real_escape_string($q)."%'"
-                        ." OR artist like '%".mysql_real_escape_string($q)."%'";
+                    ."WHERE (song like '%".mysql_real_escape_string($q)."%'"
+                        ." OR artist like '%".mysql_real_escape_string($q)."%')";
             if($star == 1 && $user == $authority) {
-                $sql = " AND star='1'";
+                $sql .= " AND star='1'";
             }
             $sql .= " ORDER BY ".($user==$authority?"downloaded ASC, star DESC,":"")."timestamp DESC";
+
+            echo $sql;
 
 /*
             $sql = "SELECT id,song,artist,youtubeURL,timestamp,downloaded,bad,star,cd FROM $dbTable "
