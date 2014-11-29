@@ -4,18 +4,21 @@
     include "../../config/config.php";
 
     if (isset($_SERVER['HTTP_ORIGIN'])) {
-        if ( strpos($_SERVER['HTTP_ORIGIN'], $allowedDomains[0]) > -1 ) {
-            header("Access-Control-Allow-Origin: ".$_SERVER['HTTP_ORIGIN']);
-            header("Access-Control-Allow-Methods: POST");
-            header("Access-Control-Allow-Headers: charset, content-type");
-        } elseif ( strpos($_SERVER['HTTP_ORIGIN'], $allowedDomains[1]) > -1 ) {
-            header("Access-Control-Allow-Origin: ".$_SERVER['HTTP_ORIGIN']);
-            header("Access-Control-Allow-Methods: GET, POST, PUT");
-            header("Access-Control-Allow-Headers: charset, content-type");
-        } elseif ( strpos($_SERVER['HTTP_ORIGIN'], $allowedDomains[2]) > -1 ) {
-            header("Access-Control-Allow-Origin: ".$_SERVER['HTTP_ORIGIN']);
-            header("Access-Control-Allow-Methods: POST");
-            header("Access-Control-Allow-Headers: charset, content-type");
+        for($i = 0; $i < count($postOnlyDomains); ++$i) {
+            if ( strpos($_SERVER['HTTP_ORIGIN'], $postOnlyDomains[$i]) > -1 ) {
+                header("Access-Control-Allow-Origin: ".$_SERVER['HTTP_ORIGIN']);
+                header("Access-Control-Allow-Methods: POST");
+                header("Access-Control-Allow-Headers: charset, content-type");
+                break;
+            }
+        }
+        for($i = 0; $i < count($personalAPI); ++$i) {
+            if ( strpos($_SERVER['HTTP_ORIGIN'], $personalAPI[$i]) > -1 ) {
+                header("Access-Control-Allow-Origin: ".$_SERVER['HTTP_ORIGIN']);
+                header("Access-Control-Allow-Methods: GET, POST, PUT");
+                header("Access-Control-Allow-Headers: charset, content-type");
+                break;
+            }
         }
     }
 
