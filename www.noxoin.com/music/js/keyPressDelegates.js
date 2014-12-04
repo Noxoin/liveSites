@@ -1,6 +1,9 @@
 var play = false;
 window.onkeydown = function(e) { 
-    if (e.keyCode == 32) { // enter key and prevents scrolling
+    if (document.activeElement.tagName === "INPUT") {
+        return true;
+    }
+    if (e.keyCode == 32 && document.activeElement.tagName != "INPUT") { // enter key and prevents scrolling
         if (play) {
             SCM.pause();
             play = false;
@@ -8,8 +11,9 @@ window.onkeydown = function(e) {
             SCM.play();
             play = true;
         }
+        return false;
     }
-    return !(e.keyCode == 32);
+    return true;
 };
 
 function keyPress(keyCode) {
