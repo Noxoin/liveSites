@@ -1,6 +1,6 @@
 function updateSong(element){
     var url = document.URL;
-    url = url.replace("noxoin","api.noxoin");
+    url = url.replace("www.noxoin","api.noxoin");
     url = url.substr(0,url.indexOf("?"));
     var request = new XMLHttpRequest();
     request.open("PUT", url, true);
