@@ -26,7 +26,7 @@ function updateSong(element){
 
 function insert() {
     var url = document.URL;
-    url = url.replace("noxoin","api.noxoin");
+    url = url.replace("www.noxoin","api.noxoin");
     url = url.substr(0,url.indexOf("?"));
     values = document.getElementById("insertion").getElementsByTagName("input");
 
