@@ -1,115 +1,137 @@
-<!DOCTYPE html>
 <html>
     <head>
-        <title>Dixon Cheung | Noxoin</title>
-        <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Muli">
-        <link rel="icon" type="image/ico" href="http://www.noxoin.com/favicon.ico"/>
-        <meta charset="UTF-8">
-        <meta name="author" content="Dixon Cheung">
-        <meta name="description" content="This is a personal website for Dixon Cheung">
-        <meta name="keywords" content="Dixon,Cheung,Noxoin">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+        <link rel="stylesheet" type="text/css" href="semantic/dist/semantic.css">
+        <script src="semantic/dist/semantic.min.js"></script>
+        <title>Dixon Cheung</title>
         <style type="text/css">
-            html, body, h1, h2, h3, h4, h5, h6, p, ul, li, a, img, div, nav {
-                margin: 0px;
-                padding: 0px;
-                text-decoration: none;
-                color: #000000;
-                text-transform: none;
-                font-family: "Muli", sans-serif;
-                font-size: 1em;
-            }
-            html, body, div, nav {
-                width: 100%;
-            }
             body {
-                /*background-color: blue;*/
-                margin-left: auto;
-                margin-right: auto;
-                min-width: 665px;
+                background-color: #555555;
             }
-            nav {
-                max-width: 100%;
-                height: 50px;
-                background-color: #B9D3EE;
+            .ui.masthead.segment.vertical {
+                min-height: 800px;
+                padding-bottom: 1em;
+                background: url("assets/images/background.png") no-repeat;
+                background-size: cover;
+                background-position: center center;
             }
-            .content {
-                max-width: 1000px;
-                margin-left: auto;
-                margin-right: auto;
-                text-align: center;
+            .masthead div.ui.landing {
+                padding-top: 3em;
+                font-size: 3em;
             }
-            nav .content ul{ 
-                width: 310px;
+            .ui.vertical.segment.stripe {
+                padding: 5em 0em;
+                background-color: white;
             }
-            nav .content ul li {
-                display: inline-block;
-                text-align: center;
+            .ui.secondary.menu.pointing .toc.item {
+                display:none;
             }
-            nav .content ul li:hover {
-                color: #FFFFFF;
+            .ui.secondary.menu.pointing.inverted {
+                border: 0px;
             }
-            nav .content ul li a {
-                padding-top: 20px;
-                width: 100px;
-                height: 30px;
-                display: block;
-            }
-            #social_media_icons {
-                float: right;
-                text-align: right;
-                width: 350px;
-                margin-right:20px;
-            }
-            #social_media_icons img {
-                display: inline-block;
-                height: 40px;
-                padding-top: 5px;
-                margin-left: 5px;
-            }
-            h1 {
-                font-size: 60pt;
-                text-align: center;
-            }
-            #logo {
-                margin-top: 30px;
-                width: 200px;
-                display: inline;
+
+            @media only screen and (max-width: 700px) {
+                .ui.secondary.menu.pointing .toc.item {
+                    display: block;
+                }
+                .ui.secondary.menu.pointing .item {
+                    display: none;
+                }
+                .ui.secondary.menu.pointing .right.item {
+                    display: block;
+                }
+
             }
         </style>
-    </head>
-    <body>
-        <nav>
-            <div class="content">
-                <div id="social_media_icons">
-                    <a href="https://twitter.com/Noxoin"><img src="images/ic_tw.png" alt="Twitter"/></a>
-                    <a href="https://github.com/Noxoin"><img src="images/ic_gh.png" alt="GitHub"/></a>
-                    <a href="https://www.linkedin.com/profile/view?id=130200220"><img src="images/ic_ln.png" alt="LinkedIn"/></a>
-                    <a href="http://random.noxoin.com/"><img src="images/ic_tb.png" alt="LinkedIn"/></a>
-                    <!--<a href="http://osu.ppy.sh/u/noxoin"><img src="images/ic_osu.png" alt="osu! Game"/></a>-->
-                </div>
-                <ul>
-                    <li><a href="docs/Resume.pdf">Resume</a></li>
-                    <li><a href="http://blog.noxoin.com/">Blog</a></li>
-                    <li><a href="mailto:dixon.cheung@noxoin.com">Contact</a></li>
-                </ul>
-            </div>
-        </nav>
-        <section>
-            <div class="content">
-                <img id="logo" src="images/logo.png" alt="Logo"/>
-                <h1>Dixon Cheung</h1>
-                <p>Welcome to my homepage.</p>
-            </div>
-        </section>
-        
         <script>
-            (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-            })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+            $(document).ready(function() {
+                // create sidebar and attach to menu open
+                $('.ui.stackable.menu.fixed').sidebar('attach events', '.toc.item');
 
-            ga('create', 'UA-29197322-4', 'auto');
-            ga('send', 'pageview');
+            });
         </script>
+    </head>
+    <body >
+        <!-- Fixed Top Menu when Scrolling -->
+        <div class="ui stackable menu transition hidden huge fixed">
+            <div class="ui container">
+                <a class="active item" href="#home">Home</a>
+                <a class="item" href="#projects">Projects</a>
+                <a class="item" href="#about">About</a>
+                <a class="item" href="mailto:dixoncheung001@gmail.com">Contact</a>
+                <a class="item" href="/docs/Resume.pdf">Resume</a>
+                <a class="item" href="http://blog.noxoin.com/">Blog</a>
+            </div>
+        </div>
+
+        <!-- Page Contents -->
+        <div id="home" class="ui segment vertical masthead center aligned ">
+            <div class="ui container">
+                <div class="ui inverted secondary menu pointing large">
+                    <a class="toc item"><i class="sidebar icon"></i></a>
+                    <a class="item" href="#home">Home</a>
+                    <a class="item" href="#projects">Projects</a>
+                    <a class="item" href="#about">About</a>
+                    <a class="item" href="mailto:dixoncheung001@gmail.com">Contact</a>
+                    <a class="item" href="/docs/Resume.pdf">Resume</a>
+                    <a class="item" href="http://blog.noxoin.com/">Blog</a>
+                    <div class="right item">
+                        <a class="" href="https://ca.linkedin.com/in/dixon-cheung-42472b37"><i class="linkedin square icon large "/></i></a>
+                        <a class="" href="http://www.github.com/Noxoin"><i class="github square icon large "/></i></a>
+                        <a class="" href=""><i class="stack overflow icon large "/></i></a>
+                        <a class="" href=""><i class="spotify icon large "/></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="ui text container landing">
+                <img id="logo" class="ui centered inverted medium image" src="assets/images/solid-logo.png" alt="Logo">
+                <h1 class="ui header large inverted">
+                    Dixon Cheung
+                </h1>
+            </div>
+        </div>
+        <div id="projects" class="ui segment large vertical stripe">
+            <div class="ui container two column stackable grid">
+                <div class="column">
+                    <img class="ui fluid image" src="assets/images/chinese_music_screenshot.png" />
+                </div>
+                <div class="column">
+                        <h2 class="ui header">Chinese Music Tracking</h2>
+                        <p>An application to track chinese music I've come across on YouTube.</p>
+                        <p>This contains 2 portions of the application; a chrome extension and a web application. The chrome extension will send a REST call to the api if it detects a chinese song from <a href="https://www.youtube.com/user/joyrich06">JoyRich</a>. This in turn will allow me to manage new songs listened to, <i>star</i> the favourites and use the application as a music player.</p>
+                        <a href="http://www.noxoin.com/music/chinese/"><button class="ui button">App <i class="right arrow icon"></i></button></a>
+                        <a href="https://github.com/Noxoin/liveSites/tree/master/www.noxoin.com/music"><button class="ui button">Source <i class="right code icon"></i></button></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="about" class="ui segment vertical stripe">
+            <div class="ui text container">
+                <img class="ui medium centered image circular" src="assets/images/profile.jpg"/>
+                <h2 class="ui header">About Me</h2>
+                <p>I'm a Torontonian currently working as a Software Engineering @ Index Exchange in the Kitchener-Waterloo Region. I am passionate about software development and hope to apply my expertise in making people's day-to-day lives easier, all while learning about new technologies.</p>
+                <p>I'm deeply interested in the technical aspect of my profession, and continually strives to get better through practicing and participating in various coding competitions i.e. AdventOfCode, Google CodeJam and Facebook's HackerCup.</p>
+                <div class="ui container center aligned">
+                    <a href="mailto:dixoncheung001@gmail.com"><button class="ui large button">Email Me<i class="right mail icon"></i></button></a>
+                    <a href="/docs/Resume.pdf"><button class="ui large button">Resume<i class="right file pdf outline icon"></i></button></a>
+                </div>
+            </div>
+        </div>
+        <div class="ui inverted vertical footer segment">
+            <div class="ui container">
+                <div class="ui inverted secondary menu">
+                    <div class="item">
+                        &copy; 2017 Dixon Cheung
+                    </div>
+                    <div class="inverted right item">
+                        <a class="" href="https://ca.linkedin.com/in/dixon-cheung-42472b37"><i class="linkedin square icon large "/></i></a>
+                        <a class="" href="http://www.github.com/Noxoin"><i class="github square icon large "/></i></a>
+                        <a class="" href=""><i class="stack overflow icon large "/></i></a>
+                        <a class="" href=""><i class="spotify icon large "/></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
     </body>
 </html>
