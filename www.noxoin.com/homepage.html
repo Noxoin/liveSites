@@ -12,9 +12,7 @@
             .ui.masthead.segment.vertical {
                 min-height: 800px;
                 padding-bottom: 1em;
-                //background: url("https://t3.ftcdn.net/jpg/00/85/41/84/240_F_85418412_qwlWEGFSx27H1v4eGqvYREFlzQWZZSrF.jpg") no-repeat center fixed;
                 background: url("assets/images/background.png") no-repeat;
-                //background: url("https://c1.staticflickr.com/1/185/475485352_347b56d660_b.jpg") no-repeat center ;
                 background-size: cover;
                 background-position: center center;
             }
@@ -22,7 +20,7 @@
                 padding-top: 3em;
                 font-size: 3em;
             }
-            .vertical.segment.stripe {
+            .ui.vertical.segment.stripe {
                 padding: 5em 0em;
                 background-color: white;
             }
@@ -37,29 +35,19 @@
                 .ui.secondary.menu.pointing .toc.item {
                     display: block;
                 }
-                .ui.secondary.menu.pointing .item,
-                .ui.secondary.menu.pointing .menu {
+                .ui.secondary.menu.pointing .item {
                     display: none;
+                }
+                .ui.secondary.menu.pointing .right.item {
+                    display: block;
                 }
 
             }
         </style>
         <script>
             $(document).ready(function() {
-
-                // fix menu when passed
-                $('.masthead').visibility({
-                    once: false,
-                    onBottomPassed: function() {
-                        $('.fixed.menu').transition('fade in');
-                    },
-                    onBottomPassedReverse: function() {
-                        $('.fixed.menu').transition('fade out');
-                    }
-                });
-
                 // create sidebar and attach to menu open
-                $('.ui.sidebar').sidebar('attach events', '.toc.item');
+                $('.ui.stackable.menu.fixed').sidebar('attach events', '.toc.item');
 
             });
         </script>
@@ -68,88 +56,79 @@
         <!-- Fixed Top Menu when Scrolling -->
         <div class="ui stackable menu transition hidden huge fixed">
             <div class="ui container">
-                <a class="active item">Home</a>
-                <a class="item">Projects</a>
-                <a class="item">About</a>
-                <a class="item">Contact</a>
-                <a class="item">Resume</a>
-                <a class="item">Blog</a>
+                <a class="active item" href="home">Home</a>
+                <a class="item" href="#projects">Projects</a>
+                <a class="item" href="#about">About</a>
+                <a class="item" href="mailto:dixoncheung001@gmail.com">Contact</a>
+                <a class="item" href="/docs/Resume.pdf">Resume</a>
+                <a class="item" href="http://blog.noxoin.com/">Blog</a>
             </div>
         </div>
 
         <!-- Page Contents -->
-        <div >
-            <div class="ui segment vertical masthead center aligned ">
-                <!--<div class="blue inverted ui menu huge container">-->
-                <div class="ui container">
-                    <div class="ui inverted secondary menu pointing large">
-                        <a class="toc item"><i class="sidebar icon"></i></a>
-                        <a class="active item">Home</a>
-                        <a class="item">Projects</a>
-                        <a class="item">About</a>
-                        <a class="item">Contact</a>
-                        <a class="item">Resume</a>
-                        <a class="item">Blog</a>
-                        <div class="right item">
-                            <a class="" href="https://ca.linkedin.com/in/dixon-cheung-42472b37"><i class="linkedin square icon large "/></i></a>
-                            <a class="" href="http://www.github.com/Noxoin"><i class="github square icon large "/></i></a>
-                            <a class="" href=""><i class="stack overflow icon large "/></i></a>
-                            <a class="" href=""><i class="spotify icon large "/></i></a>
-                        </div>
-                    </div>
-                </div>
-                <div class="ui text container landing">
-                    <img id="logo" class="ui centered inverted medium image" src="assets/images/solid-logo.png" alt="Logo">
-                    <h1 class="ui header large inverted">
-                        Dixon Cheung
-                    </h1>
-                    <h2 class="ui header inverted">
-                        <i>Welcome to my homepage</i>
-                    </h2>
-                </div>
-            </div>
-            <div class="ui segment vertical stripe">
-                <div class="ui container two column stackable grid mobile reversed">
-                    <div class="column">
-                        <img class="ui fluid image" src="http://68.media.tumblr.com/f815c3af3995e7841a8fbb8a9ac75622/tumblr_inline_nerew9A7Qk1rz9fhk.png" />
-                    </div>
-                    <div class="column image">
-                            <h2 class="ui header">Chinese Music Tracking</h2>
-                            <p>An application to track chinese music I've come across on YouTube.</p>
-                            <p>This contains 2 portions of the application; a chrome extension and a web application. The chrome extension will send a REST call to the api if it detects a chinese song from <a href="">JoyRich</a>. This in turn will allow me to manage new songs listened to, <i>star</i> the favourites and use the application as a music player.</p>
-                            <a href="http://www.noxoin.com/music/chinese/"><button class="ui button">App <i class="right arrow icon"></i></button></a>
-                            <a href=""><button class="ui button">Source <i class="right arrow icon"></i></button></a>
-                        </div>
+        <div id="home" class="ui segment vertical masthead center aligned ">
+            <div class="ui container">
+                <div class="ui inverted secondary menu pointing large">
+                    <a class="toc item"><i class="sidebar icon"></i></a>
+                    <a class="item" href="home">Home</a>
+                    <a class="item" href="#projects">Projects</a>
+                    <a class="item" href="#about">About</a>
+                    <a class="item" href="mailto:dixoncheung001@gmail.com">Contact</a>
+                    <a class="item" href="/docs/Resume.pdf">Resume</a>
+                    <a class="item" href="http://blog.noxoin.com/">Blog</a>
+                    <div class="right item">
+                        <a class="" href="https://ca.linkedin.com/in/dixon-cheung-42472b37"><i class="linkedin square icon large "/></i></a>
+                        <a class="" href="http://www.github.com/Noxoin"><i class="github square icon large "/></i></a>
+                        <a class="" href=""><i class="stack overflow icon large "/></i></a>
+                        <a class="" href=""><i class="spotify icon large "/></i></a>
                     </div>
                 </div>
             </div>
-            <div class="ui segment vertical stripe">
-                <div class="ui container">
-                    <img class="ui medium left floated rounded image spaced" src="assets/images/profile.jpg"/>
-                    <h2 class="ui header">About Me</h2>
-                    <p>I am a new graduate (Class of 2016) from the University of Waterloo in Computer Engineering. I am passionate about software development and enjoy solving difficult problem and learning about new technologies. I have experience hardware and software applications from my prior co-ops and am looking to apply my knowledge to develop new products and solutions.</p>
-                    <h3 class="ui header">What I’ve worked on</h3>
-                    <p>I worked on multiple software applications during my co-ops at OANDA and TD Bank, being responsible for the design, implementation, testing and deployment for these systems. I also developed multiple proof-of-concepts for security solutions during my time at Pitney Bowes in Java. I have a solid academic background with data structures, algorithms, multi-threaded programming, and distributed systems.</p>
-                    <h3 class="ui header">Personal Extras</h3>
-                    <p>I gained additional experiences by developing various side-projects such as a music tracker web app and an Android snooker app. I also participate in hack-a-thons and various coding competitions such as Codechef, TopChef, and Google CodeJam.</p>
+            <div class="ui text container landing">
+                <img id="logo" class="ui centered inverted medium image" src="assets/images/solid-logo.png" alt="Logo">
+                <h1 class="ui header large inverted">
+                    Dixon Cheung
+                </h1>
+            </div>
+        </div>
+        <div id="projects" class="ui segment large vertical stripe">
+            <div class="ui container two column stackable grid">
+                <div class="column">
+                    <img class="ui fluid image" src="assets/images/chinese_music_screenshot.png" />
                 </div>
-                <h2 class="ui horizontal divider header container">Contact Me</h2>
-                <div class="ui text container">
-                    <p>Feel free to email me <i class="at icon"></i>dixoncheung001@gmail.com</p>
+                <div class="column">
+                        <h2 class="ui header">Chinese Music Tracking</h2>
+                        <p>An application to track chinese music I've come across on YouTube.</p>
+                        <p>This contains 2 portions of the application; a chrome extension and a web application. The chrome extension will send a REST call to the api if it detects a chinese song from <a href="https://www.youtube.com/user/joyrich06">JoyRich</a>. This in turn will allow me to manage new songs listened to, <i>star</i> the favourites and use the application as a music player.</p>
+                        <a href="http://www.noxoin.com/music/chinese/"><button class="ui button">App <i class="right arrow icon"></i></button></a>
+                        <a href="https://github.com/Noxoin/liveSites/tree/master/www.noxoin.com/music"><button class="ui button">Source <i class="right code icon"></i></button></a>
+                    </div>
                 </div>
             </div>
-            <div class="ui inverted vertical footer segment">
-                <div class="ui container">
-                    <div class="ui inverted secondary menu">
-                        <div class="item">
-                            &copy; 2017 Dixon Cheung
-                        </div>
-                        <div class="inverted right item">
-                            <a class="" href="https://ca.linkedin.com/in/dixon-cheung-42472b37"><i class="linkedin square icon large "/></i></a>
-                            <a class="" href="http://www.github.com/Noxoin"><i class="github square icon large "/></i></a>
-                            <a class="" href=""><i class="stack overflow icon large "/></i></a>
-                            <a class="" href=""><i class="spotify icon large "/></i></a>
-                        </div>
+        </div>
+        <div id="about" class="ui segment vertical stripe">
+            <div class="ui text container">
+                <img class="ui medium centered image circular" src="assets/images/profile.jpg"/>
+                <h2 class="ui header">About Me</h2>
+                <p>I'm a Torontonian currently working as a Software Engineering @ Index Exchange in the Kitchener-Waterloo Region. I am passionate about software development and hope to apply my expertise in making people's day-to-day lives easier, all while learning about new technologies.</p>
+                <p>I'm deeply interested in the technical aspect of my profession, and continually strives to get better through practicing and participating in various coding competitions i.e. AdventOfCode, Google CodeJam and Facebook's HackerCup.</p>
+                <div class="ui container center aligned">
+                    <a href="mailto:dixoncheung001@gmail.com"><button class="ui large button">Email Me<i class="right mail icon"></i></button></a>
+                    <a href="/docs/Resume.pdf"><button class="ui large button">Resume<i class="right file pdf outline icon"></i></button></a>
+                </div>
+            </div>
+        </div>
+        <div class="ui inverted vertical footer segment">
+            <div class="ui container">
+                <div class="ui inverted secondary menu">
+                    <div class="item">
+                        &copy; 2017 Dixon Cheung
+                    </div>
+                    <div class="inverted right item">
+                        <a class="" href="https://ca.linkedin.com/in/dixon-cheung-42472b37"><i class="linkedin square icon large "/></i></a>
+                        <a class="" href="http://www.github.com/Noxoin"><i class="github square icon large "/></i></a>
+                        <a class="" href=""><i class="stack overflow icon large "/></i></a>
+                        <a class="" href=""><i class="spotify icon large "/></i></a>
                     </div>
                 </div>
             </div>
