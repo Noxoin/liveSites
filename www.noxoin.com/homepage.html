@@ -2,7 +2,7 @@
     <head>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
-        <link rel="stylesheet" type="text/css" href="semantic/dist/semantic.min.css">
+        <link rel="stylesheet" type="text/css" href="semantic/dist/semantic.css">
         <script src="semantic/dist/semantic.min.js"></script>
         <title>Dixon Cheung</title>
         <style type="text/css">
@@ -13,28 +13,35 @@
                 min-height: 800px;
                 padding-bottom: 1em;
                 //background: url("https://t3.ftcdn.net/jpg/00/85/41/84/240_F_85418412_qwlWEGFSx27H1v4eGqvYREFlzQWZZSrF.jpg") no-repeat center fixed;
-                background: url("assets/images/background.png") no-repeat center fixed;
+                background: url("assets/images/background.png") no-repeat;
                 //background: url("https://c1.staticflickr.com/1/185/475485352_347b56d660_b.jpg") no-repeat center ;
                 background-size: cover;
+                background-position: center center;
             }
             .masthead div.ui.landing {
                 padding-top: 3em;
                 font-size: 3em;
             }
-            #logo {
-                width: 350px;
-            }
             .vertical.segment.stripe {
-                padding: 3em 0em;
+                padding: 5em 0em;
                 background-color: white;
-            }
-            .ui.footer.segment {
             }
             .ui.secondary.menu.pointing .toc.item {
                 display:none;
             }
             .ui.secondary.menu.pointing.inverted {
                 border: 0px;
+            }
+
+            @media only screen and (max-width: 700px) {
+                .ui.secondary.menu.pointing .toc.item {
+                    display: block;
+                }
+                .ui.secondary.menu.pointing .item,
+                .ui.secondary.menu.pointing .menu {
+                    display: none;
+                }
+
             }
         </style>
         <script>
@@ -92,36 +99,38 @@
                     </div>
                 </div>
                 <div class="ui text container landing">
-                    <img id="logo" class="ui center aligned inverted" src="assets/images/logo.png" alt="Logo">
+                    <img id="logo" class="ui centered inverted medium image" src="assets/images/solid-logo.png" alt="Logo">
                     <h1 class="ui header large inverted">
                         Dixon Cheung
                     </h1>
+                    <h2 class="ui header inverted">
+                        <i>Welcome to my homepage</i>
+                    </h2>
                 </div>
             </div>
             <div class="ui segment vertical stripe">
-                <div class="ui container stackable grid">
-                    <div class="six wide column image">
-                        <img style="width:100%" src="http://68.media.tumblr.com/f815c3af3995e7841a8fbb8a9ac75622/tumblr_inline_nerew9A7Qk1rz9fhk.png" />
+                <div class="ui container two column stackable grid mobile reversed">
+                    <div class="column">
+                        <img class="ui fluid image" src="http://68.media.tumblr.com/f815c3af3995e7841a8fbb8a9ac75622/tumblr_inline_nerew9A7Qk1rz9fhk.png" />
                     </div>
-                    <div class="eight wide column image">
+                    <div class="column image">
                             <h2 class="ui header">Chinese Music Tracking</h2>
-                            <p >I am a new graduate (Class of 2016) from the University of Waterloo in Computer Engineering. I am passionate about software development and enjoy solving difficult problem and learning about new technologies. I have experience hardware and software applications from my prior co-ops and am looking to apply my knowledge to develop new products and solutions.</p>
+                            <p>An application to track chinese music I've come across on YouTube.</p>
+                            <p>This contains 2 portions of the application; a chrome extension and a web application. The chrome extension will send a REST call to the api if it detects a chinese song from <a href="">JoyRich</a>. This in turn will allow me to manage new songs listened to, <i>star</i> the favourites and use the application as a music player.</p>
+                            <a href="http://www.noxoin.com/music/chinese/"><button class="ui button">App <i class="right arrow icon"></i></button></a>
+                            <a href=""><button class="ui button">Source <i class="right arrow icon"></i></button></a>
+                        </div>
                     </div>
-
                 </div>
-                <h2 class="ui horizontal divider header container">About Me</h2>
-                <div class="ui text container">
+            </div>
+            <div class="ui segment vertical stripe">
+                <div class="ui container">
+                    <img class="ui medium left floated rounded image spaced" src="assets/images/profile.jpg"/>
+                    <h2 class="ui header">About Me</h2>
                     <p>I am a new graduate (Class of 2016) from the University of Waterloo in Computer Engineering. I am passionate about software development and enjoy solving difficult problem and learning about new technologies. I have experience hardware and software applications from my prior co-ops and am looking to apply my knowledge to develop new products and solutions.</p>
-                    <h3 class="ui horizontal divider header">Skills</h3>
-                    <li>Experienced with <b>Java</b> through multiple co-ops and is my primary language.</li>
-                    <li>Proficient with <b>C/C++</b> from school course assignments, including multi-threaded programming</li>
-                    <li>Familiar with scripting languages, <b>Python</b> and <b>Perl</b></li>
-                    <li>Knowledgable in front-end and back-end web technologies,  i.e. <b>HTML/CSS</b>, <b>Javascript</b>, <b>JQuery</b>, <b>AJAX</b>, MVC models, <b>RESTful API</b> <b>SQL</b></li>
-                    <li>Understands OOP design, data structures and algorithms, automated testing and troubleshooting/debugging</li>
-
-                    <h3 class="ui horizontal divider header">What I’ve worked on</h3>
+                    <h3 class="ui header">What I’ve worked on</h3>
                     <p>I worked on multiple software applications during my co-ops at OANDA and TD Bank, being responsible for the design, implementation, testing and deployment for these systems. I also developed multiple proof-of-concepts for security solutions during my time at Pitney Bowes in Java. I have a solid academic background with data structures, algorithms, multi-threaded programming, and distributed systems.</p>
-                    <h3 class="ui horizontal divider header">Personal Extras</h3>
+                    <h3 class="ui header">Personal Extras</h3>
                     <p>I gained additional experiences by developing various side-projects such as a music tracker web app and an Android snooker app. I also participate in hack-a-thons and various coding competitions such as Codechef, TopChef, and Google CodeJam.</p>
                 </div>
                 <h2 class="ui horizontal divider header container">Contact Me</h2>
