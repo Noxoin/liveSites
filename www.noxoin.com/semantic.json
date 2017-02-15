@@ -18,5 +18,23 @@
   "permission": false,
   "autoInstall": false,
   "rtl": false,
+  "components": [
+    "reset",
+    "site",
+    "button",
+    "container",
+    "divider",
+    "header",
+    "icon",
+    "image",
+    "segment",
+    "grid",
+    "menu",
+    "item",
+    "sidebar",
+    "transition",
+    "state",
+    "visibility"
+  ],
   "version": "2.2.7"
 }
