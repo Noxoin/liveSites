@@ -1,5 +1,5 @@
  /*
- * # Semantic UI - 2.2.7
+ * # Semantic UI - 2.2.13
  * https://github.com/Semantic-Org/Semantic-UI
  * http://www.semantic-ui.com/
  *
@@ -9,7 +9,7 @@
  *
  */
 /*!
- * # Semantic UI 2.2.7 - Site
+ * # Semantic UI 2.2.13 - Site
  * http://github.com/semantic-org/semantic-ui/
  *
  *
@@ -497,7 +497,7 @@ $.extend($.expr[ ":" ], {
 })( jQuery, window, document );
 
 /*!
- * # Semantic UI 2.2.7 - Sidebar
+ * # Semantic UI 2.2.13 - Sidebar
  * http://github.com/semantic-org/semantic-ui/
  *
  *
@@ -586,10 +586,6 @@ $.fn.sidebar = function(parameters) {
           module.create.id();
 
           transitionEvent = module.get.transitionEvent();
-
-          if(module.is.ios()) {
-            module.set.ios();
-          }
 
           // avoids locking rendering if initialized in onReady
           if(settings.delaySetup) {
@@ -1067,6 +1063,7 @@ $.fn.sidebar = function(parameters) {
         set: {
 
           // ios only (scroll on html not document). This prevent auto-resize canvas/scroll in ios
+          // (This is no longer necessary in latest iOS)
           ios: function() {
             $html.addClass(className.ios);
           },
@@ -1534,7 +1531,7 @@ $.fn.sidebar.settings = {
 })( jQuery, window, document );
 
 /*!
- * # Semantic UI 2.2.7 - Transition
+ * # Semantic UI 2.2.13 - Transition
  * http://github.com/semantic-org/semantic-ui/
  *
  *
@@ -2630,7 +2627,7 @@ $.fn.transition.settings = {
 })( jQuery, window, document );
 
 /*!
- * # Semantic UI 2.2.7 - State
+ * # Semantic UI 2.2.13 - State
  * http://github.com/semantic-org/semantic-ui/
  *
  *
@@ -3339,7 +3336,7 @@ $.fn.state.settings = {
 })( jQuery, window, document );
 
 /*!
- * # Semantic UI 2.2.7 - Visibility
+ * # Semantic UI 2.2.13 - Visibility
  * http://github.com/semantic-org/semantic-ui/
  *
  *
@@ -3727,7 +3724,11 @@ $.fn.visibility = function(parameters) {
               .attr('src', src)
             ;
             if(settings.transition) {
-              if( $.fn.transition !== undefined ) {
+              if( $.fn.transition !== undefined) {
+                if($module.hasClass(className.visible)) {
+                  module.debug('Transition already occurred on this image, skipping animation');
+                  return;
+                }
                 $module.transition(settings.transition, settings.duration, callback);
               }
               else {
@@ -3758,6 +3759,22 @@ $.fn.visibility = function(parameters) {
               return !(module.cache.element.width === 0 && module.cache.element.offset.top === 0);
             }
             return false;
+          },
+          verticallyScrollableContext: function() {
+            var
+              overflowY = ($context.get(0) !== window)
+                ? $context.css('overflow-y')
+                : false
+            ;
+            return (overflowY == 'auto' || overflowY == 'scroll');
+          },
+          horizontallyScrollableContext: function() {
+            var
+              overflowX = ($context.get(0) !== window)
+                ? $context.css('overflow-x')
+                : false
+            ;
+            return (overflowX == 'auto' || overflowX == 'scroll');
           }
         },
 
@@ -4215,6 +4232,13 @@ $.fn.visibility = function(parameters) {
             element.offset        = $module.offset();
             element.width         = $module.outerWidth();
             element.height        = $module.outerHeight();
+            // compensate for scroll in context
+            if(module.is.verticallyScrollableContext()) {
+              element.offset.top += $context.scrollTop() - $context.offset().top;
+            }
+            if(module.is.horizontallyScrollableContext()) {
+              element.offset.left += $context.scrollLeft - $context.offset().left;
+            }
             // store
             module.cache.element = element;
             return element;
@@ -4238,10 +4262,10 @@ $.fn.visibility = function(parameters) {
             }
 
             // visibility
-            element.topVisible       = (screen.bottom >= element.top);
             element.topPassed        = (screen.top >= element.top);
-            element.bottomVisible    = (screen.bottom >= element.bottom);
             element.bottomPassed     = (screen.top >= element.bottom);
+            element.topVisible       = (screen.bottom >= element.top) && !element.bottomPassed;
+            element.bottomVisible    = (screen.bottom >= element.bottom) && !element.topPassed;
             element.pixelsPassed     = 0;
             element.percentagePassed = 0;
 
@@ -4610,7 +4634,8 @@ $.fn.visibility.settings = {
 
   className: {
     fixed       : 'fixed',
-    placeholder : 'placeholder'
+    placeholder : 'placeholder',
+    visible     : 'visible'
   },
 
   error : {
