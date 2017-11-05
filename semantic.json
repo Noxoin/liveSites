@@ -35,7 +35,8 @@
     "sidebar",
     "transition",
     "state",
-    "visibility"
+    "visibility",
+		"input"
   ],
   "version": "2.2.13"
 }
