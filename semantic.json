@@ -25,18 +25,18 @@
     "container",
     "divider",
     "header",
-    "table",
     "icon",
     "image",
+    "input",
     "segment",
     "grid",
     "menu",
+    "table",
     "item",
     "sidebar",
     "transition",
     "state",
-    "visibility",
-		"input"
+    "visibility"
   ],
   "version": "2.2.13"
 }
