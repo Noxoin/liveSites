@@ -13,3 +13,10 @@ handlers:
 - url: /(.*)
   static_files: www/\1
   upload: www/(.*)
+
+- url: /semantic/(.*)
+  static_files: www/semantic\1
+  upload: www/semantic/(.*)
+  http_headers:
+    Access-Control-Allow-Origin: "*"
+
